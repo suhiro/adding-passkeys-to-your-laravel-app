@@ -31,6 +31,7 @@ document.addEventListener('alpine:init', () => {
             let passkey;
 
             try {
+                options.data.optionsJSON = options.data;
                 passkey = await startRegistration(options.data);
             } catch (e) {
                 this.errors = { name: ['Passkey creation failed. Please try again.'] };
@@ -59,6 +60,7 @@ document.addEventListener('alpine:init', () => {
                 const options = await axios.get('/api/passkeys/authenticate', {
                     params: {email: this.email},
                 });
+                options.data.optionsJSON = options.data;
                 answer = await startAuthentication(options.data);
             } catch (e) {
                 if (manualSubmission) {
