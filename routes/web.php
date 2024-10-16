@@ -17,7 +17,10 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::resource('passkeys', PasskeyController::class);
+    Route::post('/passkeys', [PasskeyController::class, 'store'])->name('passkeys.store');
+    Route::delete('/passkeys/{passkey}', [PasskeyController::class, 'destroy'])->name('passkeys.destroy');
 });
 
 require __DIR__.'/auth.php';
+
+Route::post('/passkeys/authenticate', [PasskeyController::class, 'authenticate'])->name('passkeys.authenticate');
